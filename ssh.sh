@@ -201,9 +201,17 @@ function singleselectn {
 	return $selected
 }
 
+
+
 options=("Debian / Ubuntu-based (APT)" "Fedora (DNF)"  "Arch Linux (Pacman)"  "CentOS / RHEL Based (Yum)"  "Another (Build from source)")
 singleselectn "${options[@]}"
 selected_os="${options[$?]}"
+
+echo ""
+echo "█▀ █▀▀ █▀▀ █░█ █▀█ █▀█ ▀█▀ █▀█ █▀█ █▄░█"
+echo "▄█ ██▄ █▄▄ █▄█ █▀▄ █▄█ ░█░ █▀▄ █▄█ █░▀█"
+echo ""
+
 echo "Selected OS: $selected_os"
 
 my_options=(   "Disable password authentication"  "Disable root account remote login"  "Limit maximum number of SSH authentication attempts"  "Change the SSH port"  "Install Fail2Ban"  "Configure IPtables for ssh security")
@@ -213,7 +221,6 @@ echo "Use arrow keys to scroll, use space to select/deselect options, press ente
 echo "-----------------------------------------------------------------------------------"
 
 multiselect result my_options preselection
-
 
 # Print the selection results
 idx=0
@@ -230,6 +237,7 @@ for option in "${my_options[@]}"; do
     fi
     ((idx++))
 done
+
 
 echo -e "Script Execution : $(date)", "Selected OS: $selected_os" | tee -a log.txt
 exec > >(tee -a log.txt) # Write the log
